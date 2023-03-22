@@ -2,12 +2,8 @@ package bus.busReservation.controller;
 
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.ReservationStatus;
-import bus.busReservation.domain.Timetable;
-import bus.busReservation.domain.User;
 import bus.busReservation.dto.ReservationDto;
-import bus.busReservation.dto.TimetableDto;
 import bus.busReservation.repository.ReservationRepository;
-import bus.busReservation.repository.TimeTableRepository;
 import bus.busReservation.service.ReservationService;
 import bus.busReservation.service.TimeTableService;
 import bus.busReservation.service.UserService;
@@ -62,27 +58,39 @@ public class UserController {
     }
 
     @GetMapping("/loginForm")
-    public String loginForm(){return "user/loginForm";}
+    public String loginForm(){
+        return "user/loginForm";
+    }
 
     @GetMapping("/joinForm")
     public String joinForm(){
         return "user/joinForm";
     }
 
-    @PostMapping("/join")
-    public String join(User user,Model model){
-        //System.out.println(user);
-        if(user.getId().contains("user")){
-            user.setRole("ROLE_USER");
-        } else if (user.getId().contains("bus")) {
-            user.setRole("ROLE_BUS");
-        }
-        String rawPassword=user.getPassword();
-        String encPassword=bCryptPasswordEncoder.encode(rawPassword);
-        user.setPassword(encPassword);
-        userService.save(user);
-        model.addAttribute("user",user);
-
-        return "redirect:/loginForm"; //redirect를 붙이면 위의 loginForm 함수로 이동
+    @GetMapping("/user/joinForm")
+    public String userJoinForm(){
+        return "user/userJoinForm";
     }
+
+    @GetMapping("/bus/joinForm")
+    public String busJoinForm(){
+        return "bus/userJoinForm";
+    }
+
+//    @PostMapping("/join")
+//    public String join(User user,Model model){
+//        //System.out.println(user);
+//        if(user.getId().contains("user")){
+//            user.setRole("ROLE_USER");
+//        } else if (user.getId().contains("bus")) {
+//            user.setRole("ROLE_BUS");
+//        }
+//        String rawPassword=user.getPassword();
+//        String encPassword=bCryptPasswordEncoder.encode(rawPassword);
+//        user.setPassword(encPassword);
+//        userService.save(user);
+//        model.addAttribute("user",user);
+//
+//        return "redirect:/loginForm"; //redirect를 붙이면 위의 loginForm 함수로 이동
+//    }
 }

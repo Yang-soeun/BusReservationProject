@@ -3,19 +3,8 @@ package bus.busReservation.repository;
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.Timetable;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.query.criteria.internal.expression.function.CurrentTimeFunction;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
-import java.sql.Time;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Repository

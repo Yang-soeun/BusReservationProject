@@ -24,7 +24,4 @@ public class UserService{
         return userRepo.save(user);
     }
 
-    public User findByIdContains(String id){
-        return userRepo.findByIdContains(id);
-    }
 }

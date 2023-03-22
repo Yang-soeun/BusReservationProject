@@ -2,10 +2,7 @@ package bus.busReservation.dto;
 
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.ReservationStatus;
-import bus.busReservation.domain.Timetable;
-import bus.busReservation.repository.TimeTableRepository;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,8 +12,8 @@ import java.sql.Time;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReservationDto {
-    private String busStart_name;
-    private String busEnd_name;
+    private String busStart_name;//탑승지 정보
+    private String busEnd_name;//하차지 정보
     private Long id;
 
     private ReservationStatus status;

@@ -19,9 +19,6 @@ public class Reservation {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-//    @Column(nullable = false)
-//    private boolean status;
-
     @OneToOne
     @JoinColumn(name = "승차정보", nullable = false)
     private Timetable onInfo;

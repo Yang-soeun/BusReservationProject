@@ -1,14 +1,10 @@
 package bus.busReservation.domain;
-
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -31,9 +27,6 @@ public class Timetable {
     @ManyToOne
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
-
-    @Column(name = "종점")
-    private String end;
 
     public void trueStatus(){
         this.setStatus(true);

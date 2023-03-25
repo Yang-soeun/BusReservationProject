@@ -2,7 +2,6 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta http-equiv="refresh" content="1">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
@@ -64,13 +63,7 @@
       </div>
     </div>
   </div>
-<!--  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">-->
-<!--    <div class="carousel-inner">-->
-<!--      <div class="carousel-item active">-->
-<!--        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#506FD1"/></svg>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+
 
   <div class="container my-5">
     <div class="bg-light p-5 rounded">
@@ -115,10 +108,10 @@
           <td th:text="${timetable.bus_name}"></td>
           <td th:text="${timetable.busStop_name}"></td>
           <td th:text="${timetable.time}"></td>
-          <th th:text="예약불가-좌석없음" th:if="${timetable.status == true}"></th>
+<!--          <th th:text="예약불가-좌석없음" th:if="${timetable.status == true}"></th>-->
           <td>
-            <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${timetable.end == '종점' and timetable.status == false}">불가</a>
-            <a th:href="@{/reservation/{id}/{name} (id=${timetable.id}, name=${timetable.bus_name})}" class="btn btn-warning" role="button" th:if="${timetable.end != '종점'and timetable.status == false}">예약</a>
+            <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${timetable.status == true}">불가</a>
+            <a th:href="@{/reservation/{id}/{name} (id=${timetable.id}, name=${timetable.bus_name})}" class="btn btn-warning" role="button" th:if="${timetable.status == false}">예약</a>
           </td>
         </tr>
         </tbody>
@@ -127,7 +120,7 @@
   </div>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2022 Bus_Reservation < Soeun and Kyungm > </p>
+    <p class="mb-1">&copy; 2023 Bus_Reservation < Soeun and Hyojeong > </p>
   </footer>
 
 </main>
@@ -149,7 +142,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        종점이므로 예약이 불가능합니다.
+         빈자리가 없습니다.
       </div>
 
       <!-- Modal footer -->

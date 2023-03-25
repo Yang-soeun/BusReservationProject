@@ -2,6 +2,7 @@ package bus.busReservation.controller;
 
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.ReservationStatus;
+import bus.busReservation.domain.User;
 import bus.busReservation.dto.ReservationDto;
 import bus.busReservation.repository.ReservationRepository;
 import bus.busReservation.service.ReservationService;
@@ -19,13 +20,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
-    private final ReservationService reservationService;
-    private final ReservationRepository reservationRepository;
-    private final TimeTableService timeTableService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private ReservationRepository reservationRepository;
+    @Autowired
+    private TimeTableService timeTableService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder; //비밀번호 암호화
@@ -77,20 +81,31 @@ public class UserController {
         return "bus/userJoinForm";
     }
 
-//    @PostMapping("/join")
-//    public String join(User user,Model model){
-//        //System.out.println(user);
-//        if(user.getId().contains("user")){
-//            user.setRole("ROLE_USER");
-//        } else if (user.getId().contains("bus")) {
-//            user.setRole("ROLE_BUS");
-//        }
-//        String rawPassword=user.getPassword();
-//        String encPassword=bCryptPasswordEncoder.encode(rawPassword);
-//        user.setPassword(encPassword);
-//        userService.save(user);
-//        model.addAttribute("user",user);
-//
-//        return "redirect:/loginForm"; //redirect를 붙이면 위의 loginForm 함수로 이동
-//    }
+    //사용자(장애인) 전용 회원가입
+    @PostMapping("user/join")
+    public String userJoin(User user){
+
+        user.setRole("USER");
+
+        String passwrod = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(passwrod);
+
+        userService.save(user);
+
+        return "redirect:/loginForm";
+    }
+
+    //버스 전용 회원가입
+    @PostMapping("bus/join")
+    public String busJoin(User user){
+
+        user.setRole("BUS");
+
+        String passwrod = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(passwrod);
+
+        userService.save(user);
+
+        return "redirect:/loginForm";
+    }
 }

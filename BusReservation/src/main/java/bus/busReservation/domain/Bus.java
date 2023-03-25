@@ -1,8 +1,5 @@
 package bus.busReservation.domain;
 
-
-import com.sun.istack.NotNull;
-
 import lombok.Getter;
 
 
@@ -19,9 +16,12 @@ public class Bus {
     @Column(nullable = false)
     private String name;
 
-    @Column(name="출발정류장",nullable = false)
-    private Long cnt;
-
     @Column(name = "차량번호", nullable = false)
     private String num;
+
+    @Column(name="출발정류장",nullable = false)
+    private Long start;
+
+    @Column(name = "종점")
+    private Long end;
 }

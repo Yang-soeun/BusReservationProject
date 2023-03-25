@@ -62,12 +62,6 @@ public class TimeTableServiceTest {
     }
 
     @Test
-    public void 종점찾기(){
-        Long endId = timeTableService.findEndId(126L);
-        System.out.println("endId = " + endId);
-    }
-
-    @Test
     public void Nolist(){
         List<Long> longs = timeTableService.NoList(2L, 11L);
 

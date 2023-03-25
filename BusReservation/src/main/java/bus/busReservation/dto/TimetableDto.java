@@ -17,7 +17,6 @@ public class TimetableDto {
     private Time time;
     private Long id;
     private boolean status;
-    private String end;
 
     public TimetableDto(Timetable timetable){
         bus_name= timetable.getBus().getName();
@@ -25,6 +24,5 @@ public class TimetableDto {
         time=timetable.getTime();
         id = timetable.getId();
         status = timetable.isStatus();
-        end = timetable.getEnd();
     }
 }

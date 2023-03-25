@@ -1,12 +1,9 @@
 package bus.busReservation.controller;
 
 import bus.busReservation.domain.Timetable;
-import bus.busReservation.domain.User;
 import bus.busReservation.dto.TimetableDto;
-import bus.busReservation.repository.BusRepository;
-import bus.busReservation.repository.ReservationRepository;
 import bus.busReservation.repository.TimeTableRepository;
-import bus.busReservation.repository.UserRepository;
+import bus.busReservation.service.BusService;
 import bus.busReservation.service.ReservationService;
 import bus.busReservation.service.TimeTableService;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +22,14 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final TimeTableService timeTableService;
     private final TimeTableRepository timeTableRepository;
-    private final BusRepository busRepository;
+    private final BusService busService;
 
-    @RequestMapping("/reservation")
+    @GetMapping("/reservation")
     public String res(){
         return "reservation/reservationList";
     }
 
-    @RequestMapping("/reservation/search")
+    @GetMapping("/reservation/search")
     public String reservation(@RequestParam(value="keyword") String keyword,Model model){
         List<TimetableDto> timetableDtoList=reservationService.findByBusStopName(keyword);
 
@@ -52,7 +49,8 @@ public class ReservationController {
             model.addAttribute("start", start);
             model.addAttribute("timetableList", destinationDtoList);
 
-            Long endId = timeTableService.findEndId(id);
+            //Long endId = timeTableService.findEndId(id);
+            Long endId = busService.findEndBusStopId(busName);
 
             List<Long> NoLists = new ArrayList<>();
 
@@ -70,6 +68,7 @@ public class ReservationController {
         }
         return null;
     }
+
    /*
    * 예약완료
    */

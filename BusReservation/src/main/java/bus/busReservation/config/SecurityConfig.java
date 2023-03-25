@@ -1,16 +1,15 @@
 package bus.busReservation.config;
-
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity(debug = true) // 필터 체인 관리 시작 어노테이션
+@EnableWebSecurity
 @Slf4j
 public class SecurityConfig{
 
@@ -20,12 +19,21 @@ public class SecurityConfig{
     }
 
     @Bean
+    public RoleHierarchyImpl roleHierarchyImpl(){
+        log.info("실행");
+        RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
+        roleHierarchyImpl.setHierarchy("ADMIN > MANAGER > USER");
+        return roleHierarchyImpl;
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/reservation/**").authenticated() //인증만 되면 들어갈 수 있는 주소!!
                 .antMatchers("/bus").hasAnyAuthority("BUS")
+                .antMatchers("/bus/joinForm").hasAnyAuthority("MANAGER")
                 .anyRequest().permitAll() //위의 주소가 아니면 누구나 들어갈 수 있음
 
                 .and()

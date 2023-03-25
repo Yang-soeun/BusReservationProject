@@ -1,17 +1,14 @@
 package bus.busReservation.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
 public class User {
     @Id
     @Column(name ="user_id")
@@ -25,7 +22,15 @@ public class User {
     private String phone;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
     private String role;
+
+    @Builder
+    public User(String username, int age, String phone, String password, String role){
+        this.username = username;
+        this.age = age;
+        this.phone = phone;
+        this.password = password;
+        this.role = role;
+    }
 
 }

@@ -1,5 +1,6 @@
 package bus.busReservation.service;
 
+import bus.busReservation.domain.Bus;
 import bus.busReservation.domain.Timetable;
 import bus.busReservation.dto.TimetableDto;
 import bus.busReservation.repository.BusRepository;
@@ -32,27 +33,64 @@ public class TimeTableService {
     }
 
     //도착지 리스트
-    public List<TimetableDto> destinationList(String busName, Long id){
+//    public List<TimetableDto> destinationList(String busName, Long id){
+//
+//        List<Timetable> list = new ArrayList<>();
+//        Long c = busService.findCnt(busName);//버스의 출발지
+//        Long next_id = id;//timetable 아이디
+//
+//        if(timeTableRepository.findById(next_id).isPresent()) {
+//            Timetable destination = timeTableRepository.findById(next_id).get();//아이디에 해당하는 timetable
+//            Long cu_bus = destination.getBus().getId();//현재 버스 id
+//
+//            Long busStop_id = destination.getBusStop().getId(); //정류장 id
+//            //list.add(destination);
+//
+//
+//            while (next_id < 262L) {//262이후로 타임 테이블이 없음
+//                next_id++;
+//                destination = timeTableRepository.findById(next_id).get();
+//                busStop_id = destination.getBusStop().getId();
+//                Long next_bus = destination.getBus().getId();
+//
+//                if ((c == busStop_id) || (cu_bus != next_bus))
+//                    break;
+//
+//                list.add(destination);
+//            }
+//
+//            List<TimetableDto> timetableDtoList = list.stream()
+//                    .map(t -> new TimetableDto(t))
+//                    .collect(Collectors.toList());
+//
+//            return timetableDtoList;
+//        }
+//        return null;
+//    }
+
+    /**
+     * 도착지 리스트 반환해주는 함수
+     */
+    public List<TimetableDto> destinationList(String busName, Long id){//id 이후부터 해당버스의 종점까지 출력해야함
 
         List<Timetable> list = new ArrayList<>();
-        Long c = busService.findCnt(busName);//버스의 출발지
-        Long next_id = id;//timetable 아이디
+        Long start_id = busService.findStartBusId(busName);//버스의 출발지
+        Long timetable_id = id;//timetable 아이디
 
-        if(timeTableRepository.findById(next_id).isPresent()) {
-            Timetable destination = timeTableRepository.findById(next_id).get();//아이디에 해당하는 timetable
-            Long cu_bus = destination.getBus().getId();//현재 버스 id
-
+        if(timeTableRepository.findById(id).isPresent()) {
+            Timetable destination = timeTableRepository.findById(id).get();//아이디에 해당하는 timetable
+            Long cu_bus_id = destination.getBus().getId();//현재 버스 id
             Long busStop_id = destination.getBusStop().getId(); //정류장 id
-            //list.add(destination);
 
 
-            while (next_id < 262L) {//262이후로 타임 테이블이 없음
-                next_id++;
-                destination = timeTableRepository.findById(next_id).get();
+            while (timetable_id < 262L) {//262이후로 타임 테이블이 없음
+                timetable_id++;
+
+                destination = timeTableRepository.findById(timetable_id).get();
                 busStop_id = destination.getBusStop().getId();
-                Long next_bus = destination.getBus().getId();
+                Long next_bus_id = destination.getBus().getId();
 
-                if ((c == busStop_id) || (cu_bus != next_bus))
+                if ((start_id == busStop_id) || (cu_bus_id != next_bus_id))//다른 버스이거나 종점이후의 정류장인경우
                     break;
 
                 list.add(destination);
@@ -68,22 +106,24 @@ public class TimeTableService {
     }
 
     //해당 버스의 종점을 찾기
-    public Long findEndId(Long id){
-        Long next_id = id;
-        while(next_id <262L){
-            next_id ++;
+//    public Long findEndId(Long id){
+//        Long next_id = id;
+//
+//        while(next_id <262L){
+//            next_id ++;
+//
+//            if(timeTableRepository.findById(next_id).isPresent()) {
+//                Timetable timetable = timeTableRepository.findById(next_id).get();
+//                String end = timetable.getEnd();
+//
+//                if (end.equals("종점"))
+//                    return next_id;
+//            }
+//        }
+//
+//        return null;
+//    }
 
-            if(timeTableRepository.findById(next_id).isPresent()) {
-                Timetable timetable = timeTableRepository.findById(next_id).get();
-                String end = timetable.getEnd();
-
-                if (end.equals("종점"))
-                    return next_id;
-            }
-        }
-
-        return null;
-    }
 
     //예약된 timetable 의 status 를 true 로 변경하기
     public void changeTrue(Long start, Long end){

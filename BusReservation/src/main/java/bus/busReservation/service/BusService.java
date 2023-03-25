@@ -24,15 +24,27 @@ public class BusService {
         return list;
     }
 
-    //특정 버스의 정류장 개수
-    public Long findCnt(String name){
+    public Long findStartBusId(String name){//버스 이름으로 해당 버스의 출발지 찾기
 
         List<Bus> busList = busRepository.findByName(name);
 
         if(busList.size() !=0)//이거 안하면 오류남
         {
             Bus bus = busList.get(0);
-            return bus.getCnt();//버스 정류장의 회차 번호 반환
+            return bus.getStart();//버스 정류장의 출발지 반환
+        }
+
+        return null;
+    }
+
+    //버스 이름으로 해당 버스의 종점 찾기
+    public Long findEndBusStopId(String busName){
+        List<Bus> busList = busRepository.findByName(busName);
+
+        if(busList.size() !=0)
+        {
+            Bus bus = busList.get(0);
+            return bus.getEnd();//버스 정류장의 도착지 id 반환
         }
 
         return null;

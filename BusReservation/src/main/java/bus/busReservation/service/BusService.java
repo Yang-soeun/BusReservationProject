@@ -31,7 +31,7 @@ public class BusService {
         if(busList.size() !=0)//이거 안하면 오류남
         {
             Bus bus = busList.get(0);
-            return bus.getStart();//버스 정류장의 출발지 반환
+            return bus.getBusStop_start().getId();//버스 정류장의 출발지 반환
         }
 
         return null;
@@ -44,7 +44,7 @@ public class BusService {
         if(busList.size() !=0)
         {
             Bus bus = busList.get(0);
-            return bus.getEnd();//버스 정류장의 도착지 id 반환
+            return bus.getBusStop_end().getId();//버스 정류장의 도착지 id 반환
         }
 
         return null;

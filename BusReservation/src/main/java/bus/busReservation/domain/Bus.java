@@ -19,9 +19,11 @@ public class Bus {
     @Column(name = "차량번호", nullable = false)
     private String num;
 
-    @Column(name="출발정류장",nullable = false)
-    private Long start;
+    @ManyToOne
+    @JoinColumn(name = "출발지", nullable = false)
+    private BusStop busStop_start;
 
-    @Column(name = "종점")
-    private Long end;
+    @ManyToOne
+    @JoinColumn(name = "종점", nullable = false)
+    private BusStop busStop_end;
 }

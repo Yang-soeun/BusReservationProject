@@ -19,21 +19,12 @@ public class SecurityConfig{
     }
 
     @Bean
-    public RoleHierarchyImpl roleHierarchyImpl(){
-        log.info("실행");
-        RoleHierarchyImpl roleHierarchyImpl = new RoleHierarchyImpl();
-        roleHierarchyImpl.setHierarchy("ADMIN > MANAGER > USER");
-        return roleHierarchyImpl;
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/reservation/**").authenticated() //인증만 되면 들어갈 수 있는 주소!!
                 .antMatchers("/bus").hasAnyAuthority("BUS")
-                .antMatchers("/bus/joinForm").hasAnyAuthority("MANAGER")
                 .anyRequest().permitAll() //위의 주소가 아니면 누구나 들어갈 수 있음
 
                 .and()
@@ -43,7 +34,7 @@ public class SecurityConfig{
                 .loginProcessingUrl("/login") // /login 주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인을 진행해줌
                 .usernameParameter("id")
                 .defaultSuccessUrl("/")//로그인 성공 후 이동 페이지.
-//                .successHandler(new LoginSuccessHandler())
+                .successHandler(new LoginSuccessHandler())
                 .and()
                 .logout().logoutUrl("/doLogout").logoutSuccessUrl("/");
         return http.build();

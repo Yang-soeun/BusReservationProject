@@ -15,7 +15,6 @@ public class ReservationDto {
     private String busStart_name;//탑승지 정보
     private String busEnd_name;//하차지 정보
     private Long id;
-
     private ReservationStatus status;
 
     public ReservationDto(Reservation reservation){

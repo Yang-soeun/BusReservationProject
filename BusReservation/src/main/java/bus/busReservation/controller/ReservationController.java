@@ -49,7 +49,6 @@ public class ReservationController {
             model.addAttribute("start", start);
             model.addAttribute("timetableList", destinationDtoList);
 
-            //Long endId = timeTableService.findEndId(id);
             Long endId = busService.findEndBusStopId(busName);
 
             List<Long> NoLists = new ArrayList<>();

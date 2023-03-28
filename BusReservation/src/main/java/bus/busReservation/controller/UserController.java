@@ -1,23 +1,11 @@
 package bus.busReservation.controller;
 
-import bus.busReservation.domain.Reservation;
-import bus.busReservation.domain.ReservationStatus;
 import bus.busReservation.domain.User;
-import bus.busReservation.dto.ReservationDto;
-import bus.busReservation.repository.ReservationRepository;
-import bus.busReservation.service.ReservationService;
-import bus.busReservation.service.TimeTableService;
 import bus.busReservation.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -46,7 +34,7 @@ public class UserController {
 
     @GetMapping("/bus/joinForm")
     public String busJoinForm(){
-        return "bus/userJoinForm";
+        return "user/busJoinForm";
     }
 
     //사용자(장애인) 전용 회원가입

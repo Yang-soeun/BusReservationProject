@@ -52,7 +52,7 @@ public class ReservationService {
 
 
     //버스기사 페이지 예약정보 찾기
-    @Transactional 
+    /*@Transactional
     public List<ReservationDto> findByReservation(String bus){
         List<Reservation> reservations=reservationRepository.findByReservation(bus);
 
@@ -70,6 +70,18 @@ public class ReservationService {
             if(reservations.isEmpty())return reservationDtoList;
             return reservationDtoList;
         }
+    }*/
+
+    @Transactional
+    public List<ReservationDto> findByReservation(Long bus_id){
+        List<Reservation> reservations = reservationRepository.findReservationById(bus_id);
+
+        List<ReservationDto> reservationDtoList=reservations.stream()
+                .map(r->new ReservationDto(r))
+                .collect(Collectors.toList());
+        if(reservations.isEmpty())return reservationDtoList;
+        return reservationDtoList;
+
     }
 
     //예약 정보

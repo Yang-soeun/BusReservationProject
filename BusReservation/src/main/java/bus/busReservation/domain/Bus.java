@@ -1,9 +1,6 @@
 package bus.busReservation.domain;
 
 import lombok.Getter;
-
-
-
 import javax.persistence.*;
 
 @Entity

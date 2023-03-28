@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta http-equiv="refresh" content="1">
+<!--    <meta http-equiv="refresh" content="1">-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -71,7 +71,7 @@
                 <td th:text="${reservation.busStart_name}" th:if="${reservation.status.name() == '예약완료'}"></td>
                 <td th:text="${reservation.busEnd_name }" th:if="${reservation.status.name() == '예약완료'}"></td>
                 <td>
-                    <a th:if="${reservation.status.name() == '예약완료'}" href="#" th:href="'javascript:cancel('+${reservation.id}+')'"
+                    <a th:if="${reservation.status.name() == '예약완료'}" href="#" th:href="'javascript:cancel('+${reservation.id}+', '+${bus_id}+')'"
                        class ="btn btn-warning">완료</a>
                 </td>
             </tr>
@@ -83,10 +83,10 @@
 </body>
 
 <script>
-    function cancel(id) {
+    function cancel(id, bus_id) {
         var form = document.createElement("form");
         form.setAttribute("method", "post");
-        form.setAttribute("action", "/bus/" + id + "/cancel");
+        form.setAttribute("action", "/bus/" + id + "/cancel/" + bus_id);
         document.body.appendChild(form);
         form.submit();
     }

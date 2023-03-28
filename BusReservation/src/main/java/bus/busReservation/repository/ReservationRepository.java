@@ -53,6 +53,14 @@ public class ReservationRepository {
                 .getResultList();
     }
 
+    public List<Reservation> findReservationById(Long bus_id){
+        return em.createQuery("select r from Reservation r "+
+                                "join r.onInfo start where start.bus.id=:id and r.status = '예약완료'"//상태정보 추가했어용
+                        , Reservation.class)
+                .setParameter("id", bus_id)
+                .getResultList();
+    }
+
     public Reservation findById(Long id){
         return em.createQuery("select r from Reservation r"
         + " where r.id = :id", Reservation.class)

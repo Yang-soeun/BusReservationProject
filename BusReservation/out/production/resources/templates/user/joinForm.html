@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Signin Template · Bootstrap v5.2</title>
+    <title>Jumbotron example · Bootstrap v5.2</title>
 
-    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/sign-in/">
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/jumbotron/">
 
 
 
@@ -82,30 +82,44 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
 </head>
-<body class="text-center">
-<main class="form-signin w-100 m-auto">
-    <form action="/user/joinForm" method="get">
-        <div class="container my-5">
-            <div class="bg-primary p-5 rounded" >
-                <div class="col-sm-8 py-5 mx-auto">
-                    <button class="btn btn-light btn-lg px-4">사용자 회원가입</button>
-                </div>
-            </div>
-        </div>
-    </form>
+<body>
+<div class="container">
+<div class="p-4 p-md-5 mb-4 rounded" style="background-color: #506FD1;">
+    <div class="col-md-6 px-0">
+        <h1 class="text-white fw-bold">Low-floor bus reservation system membership registration page</h1>
+        <p  class="text-white fw-bold">저상버스 예약 시스템 회원가입 페이지</p>
+    </div>
+</div>
+</div>
+<main>
 
-    <form action="/bus/joinForm" method="get">
-        <div class="container my-5">
-            <div class="bg-primary p-5 rounded">
-                <div class="col-sm-8 py-5 mx-auto">
-                    <button class="btn btn-light btn-lg px-4">버스기사 회원가입</button>
+    </br>
+
+    <div class="container py-4">
+
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>사용자</h2>
+                    <p>User registration</p>
+                    <a th:href="@{/user/joinForm}" class="btn btn-warning" role="button">회원가입</a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="h-100 p-5 bg-light border rounded-3">
+                    <h2>버스기사</h2>
+                    <p>Bus registration</p>
+                    <a th:href="@{/bus/joinForm}" class="btn btn-outline-secondary" role="button">회원가입</a>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+
+        <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2023 Bus_Reservation < Soeun and Hyojeong >
+        </footer>
 </main>
 </body>
 </html>

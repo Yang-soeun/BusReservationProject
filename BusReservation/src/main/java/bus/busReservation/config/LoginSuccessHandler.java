@@ -1,8 +1,6 @@
 package bus.busReservation.config;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +20,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         });
 
         if(roleNames.contains("USER")) {
-            response.sendRedirect("/");
+            response.sendRedirect("/busAll");
             return;
         } else if (roleNames.contains("BUS")) {
             //session.setAttribute("user_id",authentication.getName() + "님 반갑습니다.");

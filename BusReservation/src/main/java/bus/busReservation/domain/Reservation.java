@@ -12,8 +12,13 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)//생성메서드를 사용해서 생성하도록 제약
 public class Reservation {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "bus_id", nullable = false)
+    private Bus bus_id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -28,16 +33,19 @@ public class Reservation {
     private Timetable offInfo;
 
     @Enumerated(EnumType.STRING)
-    private ReservationStatus status;//[예약완료, 처리완료]
+    private ReservationStatus status;//[예약완료(INCOMPLETE), 처리완료(COMPLETE)]
 
     //==생성 메서드==/
-    public static Reservation createReservation(User user, Timetable onInfo, Timetable offInfo){
+    public static Reservation createReservation(User user, Bus bus_id, Timetable onInfo, Timetable offInfo){
+
         Reservation reservation = new Reservation();
 
         reservation.setUser(user);
+        reservation.setBus_id(bus_id);
         reservation.setOnInfo(onInfo);
         reservation.setOffInfo(offInfo);
-        reservation.setStatus(ReservationStatus.예약완료);
+        reservation.setStatus(ReservationStatus.INCOMPLETE);
+
         return reservation;
     }
 }

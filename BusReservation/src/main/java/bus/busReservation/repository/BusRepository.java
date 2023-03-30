@@ -1,11 +1,13 @@
 package bus.busReservation.repository;
 
 import bus.busReservation.domain.Bus;
+import bus.busReservation.domain.Timetable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -24,5 +26,13 @@ public class BusRepository {
                 + " where b.name like :name", Bus.class)
                 .setParameter("name", busName)
                 .getResultList();
+    }
+
+    public Optional<Bus> findById(Long id){
+        return Optional.ofNullable(
+                em.createQuery("select b from Bus b"
+                                + " where b.id = :id", Bus.class)
+                        .setParameter("id", id)
+                        .getSingleResult());
     }
 }

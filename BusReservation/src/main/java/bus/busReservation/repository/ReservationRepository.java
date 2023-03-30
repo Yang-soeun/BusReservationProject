@@ -17,7 +17,7 @@ public class ReservationRepository {
         return em.createQuery("select t from Timetable t "+
                         "join t.busStop s" +
                         " where s.name like concat('%',:name,'%') " +
-                        "and t.time>= date_format(now(),'%H:%i:%s') "+
+                        "and t.time  >= date_format(now(),'%H:%i:%s') "+
                         "group by t.bus.name,s.name order by t.time asc", Timetable.class)
                 .setParameter("name", name)
                 .getResultList();
@@ -32,7 +32,6 @@ public class ReservationRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
-
     //예약 정보 저장
     public void save(Reservation reservation) {
         em.persist(reservation);
@@ -40,14 +39,14 @@ public class ReservationRepository {
 
     //현재 시간 이전의 timetable 찾기
     public List<Timetable> findByTime(){
-        return em.createQuery("select t from Timetable t "+
-                        " where t.time < date_format(now(),'%H:%i:%s') ", Timetable.class)
+        return em.createQuery("select t from Timetable t"+
+                        " where t.time > date_format(now(),'%H:%i:%s') ", Timetable.class)
                 .getResultList();
     }
 
     public List<Reservation> findByReservation(String bus_name){
         return em.createQuery("select r from Reservation r "+
-                        "join r.onInfo start where start.bus.name=substring(:bus_name,4,3) and r.status = '예약완료'"//상태정보 추가했어용
+                        "join r.onInfo start where start.bus.name=substring(:bus_name,4,3) and r.status = 'INCOMPLETE'"//상태정보 추가했어용
                 , Reservation.class)
                 .setParameter("bus_name", bus_name)
                 .getResultList();
@@ -55,7 +54,7 @@ public class ReservationRepository {
 
     public List<Reservation> findReservationById(Long bus_id){
         return em.createQuery("select r from Reservation r "+
-                                "join r.onInfo start where start.bus.id=:id and r.status = '예약완료'"//상태정보 추가했어용
+                                "join r.onInfo start where start.bus.id=:id and r.status = 'INCOMPLETE'"//상태정보 추가했어용
                         , Reservation.class)
                 .setParameter("id", bus_id)
                 .getResultList();

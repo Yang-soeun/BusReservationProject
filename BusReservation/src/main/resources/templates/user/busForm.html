@@ -68,10 +68,10 @@
             </thead>
             <tbody>
             <tr th:each="reservation : ${reservationList}">
-                <td th:text="${reservation.busStart_name}" th:if="${reservation.status.name() == '예약완료'}"></td>
-                <td th:text="${reservation.busEnd_name }" th:if="${reservation.status.name() == '예약완료'}"></td>
+                <td th:text="${reservation.busStart_name}" th:if="${reservation.status.name() == 'INCOMPLETE'}"></td>
+                <td th:text="${reservation.busEnd_name }" th:if="${reservation.status.name() == 'INCOMPLETE'}"></td>
                 <td>
-                    <a th:if="${reservation.status.name() == '예약완료'}" href="#" th:href="'javascript:cancel('+${reservation.id}+', '+${bus_id}+')'"
+                    <a th:if="${reservation.status.name() == 'INCOMPLETE'}" href="#" th:href="'javascript:cancel('+${reservation.id}+', '+${bus_id}+')'"
                        class ="btn btn-warning">완료</a>
                 </td>
             </tr>

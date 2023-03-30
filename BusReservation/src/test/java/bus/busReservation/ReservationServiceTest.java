@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +41,22 @@ public class ReservationServiceTest {
     public void 이전시간표_찾기(){
         List<Timetable> timetableList = reservationRepository.findByTime();
         for (Timetable timetable : timetableList) {
-            System.out.println("timetable.getTime() = " + timetable.getTime());
+            System.out.println("timetable.getTime() = " + timetable.getTime()+ ",   "+ timetable.getId());
         }
+    }
+
+    @Test
+    public void 이후시간표_찾기(){
+        List<Timetable> timetableList = reservationRepository.findByBusStopName("건너");
+        for (Timetable timetable : timetableList) {
+            System.out.println("timetable.getTime() = " + timetable.getTime()+ ",   "+ timetable.getId());
+        }
+
+        String currentDate = new SimpleDateFormat("yyMMddhhmmss").format(
+                new java.sql.Date(System.currentTimeMillis()));
+        Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(currentDate);
     }
 
     @Test

@@ -46,19 +46,6 @@ public class BusController {
         return "user/busSelection";
     }
 
-    /*
-    @GetMapping("/bus")
-    public String busForm(Model model){
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = ((UserDetails)principal).getUsername();
-
-        List<ReservationDto> reservationDtoList= reservationService.findByReservation(username);
-        model.addAttribute("reservationList",reservationDtoList);
-
-        return "user/busForm";
-    }
-    */
-
     @GetMapping("/bus/{id}")
     public String busForm(@PathVariable("id") Long id, Model model){
 
@@ -71,6 +58,7 @@ public class BusController {
 
     @PostMapping(value = "/bus/{reservationId}/cancel/{bus_id}")//버스앱에서 완료 누르는 부분
     public String cancelReservation(@PathVariable("reservationId") Long reservationId, @PathVariable("bus_id") Long bus_id){
+        
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)principal).getUsername();
 
@@ -79,7 +67,7 @@ public class BusController {
         Long start_id = cancelReservation.getOnInfo().getId();//출발지 정보
         Long end_id = cancelReservation.getOffInfo().getId();//도착지
 
-        cancelReservation.setStatus(ReservationStatus.처리완료);//예약 상태 변경
+        cancelReservation.setStatus(ReservationStatus.COMPLETE);//예약 상태 변경
         timeTableService.changeFalse(start_id, end_id);//timetable도 예약 상태 변경해주기
 
         return "redirect:/bus/{bus_id}";

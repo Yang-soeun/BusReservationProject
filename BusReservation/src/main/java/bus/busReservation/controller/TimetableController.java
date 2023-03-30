@@ -19,7 +19,7 @@ public class TimetableController {
     private final TimeTableService timeTableService;
     private final BusService busService;
 
-    @GetMapping
+    @GetMapping("/busAll")
     public String timetableList(Model model){
         List<Bus> busList = busService.findAllName();//버스 이름 찾기
         model.addAttribute("busList", busList);
@@ -27,7 +27,7 @@ public class TimetableController {
         return "timetable/timeList";
     }
 
-    @GetMapping("/{busName}")//버스번호별로 시간표 조회하는 controller
+    @GetMapping("/{busName}/busOne")//버스번호별로 시간표 조회하는 controller
     public String oneTimetables(@PathVariable("busName") String busName,Model model){
 
         Long c = busService.findStartBusId(busName);//버스 이름으로 출발 정류장 id 값 가져오기

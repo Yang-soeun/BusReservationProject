@@ -2,12 +2,10 @@ package bus.busReservation.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 @Configuration
 @EnableWebSecurity
 @Slf4j
@@ -36,7 +34,7 @@ public class SecurityConfig{
                 .defaultSuccessUrl("/")//로그인 성공 후 이동 페이지.
                 .successHandler(new LoginSuccessHandler())
                 .and()
-                .logout().logoutUrl("/doLogout").logoutSuccessUrl("/");
+                .logout().logoutUrl("/doLogout").logoutSuccessUrl("/loginForm");
         return http.build();
     }
 }

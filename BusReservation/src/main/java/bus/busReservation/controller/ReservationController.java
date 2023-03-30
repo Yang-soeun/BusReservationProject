@@ -24,12 +24,12 @@ public class ReservationController {
     private final TimeTableRepository timeTableRepository;
     private final BusService busService;
 
-    @GetMapping("/reservation")
+    @RequestMapping("/reservation")
     public String res(){
         return "reservation/reservationList";
     }
 
-    @GetMapping("/reservation/search")
+    @RequestMapping("/reservation/search")
     public String reservation(@RequestParam(value="keyword") String keyword,Model model){
         List<TimetableDto> timetableDtoList=reservationService.findByBusStopName(keyword);
 
@@ -78,16 +78,18 @@ public class ReservationController {
 
         if(timeTableRepository.findById(start_id).isPresent() && timeTableRepository.findById(end_id).isPresent()) {
 
-                Timetable start = timeTableRepository.findById(start_id).get();
-                Timetable end = timeTableRepository.findById(end_id).get();
+            Timetable start = timeTableRepository.findById(start_id).get();
+            Timetable end = timeTableRepository.findById(end_id).get();
 
-                reservationService.saveReservation(username, start_id, end_id);//reservation table 에 예약 정보 저장
-                timeTableService.changeTrue(start_id, end_id);//timetable 의 예약 상태가 출발지~도착지까지 true 로 변경 됨
+            Long bus_id = start.getBus().getId();
 
-                model.addAttribute("start", start);
-                model.addAttribute("end", end);
+            reservationService.saveReservation(username, bus_id, start_id, end_id);//reservation table 에 예약 정보 저장
+            timeTableService.changeTrue(start_id, end_id);//timetable 의 예약 상태가 출발지~도착지까지 true 로 변경 됨
 
-                return "reservation/complete";
+            model.addAttribute("start", start);
+            model.addAttribute("end", end);
+
+            return "reservation/complete";
         }
         return null;
     }

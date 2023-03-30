@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +46,20 @@
     <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#506FD1"/></svg>
+                <nav class="navbar navbar-expand-sm" style="background-color: #506FD1;" >
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse justify-content-end">
+                            <ul class="navbar-nav" >
+                                <li class="nav-item">
+                                    <button sec:authorize="isAnonymous()" class="btn btn-outline-light" type="button" onclick="location.href='/loginForm'" >로그인</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button sec:authorize="isAuthenticated()" class="btn btn-outline-light" type="button" onclick="location.href='/doLogout'">로그아웃</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
             </div>
         </div>
     </div>
@@ -63,7 +76,7 @@
     <div class="container">
         <div class="bg-light p-0 rounded">
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-2">
-                <a href="/" class="btn btn-light btn-lg px-4">저상버스 운행정보</a>
+                <a href="/busAll" class="btn btn-light btn-lg px-4">저상버스 운행정보</a>
                 <a href="/reservation" class="btn btn-link btn-lg px-4 me-sm-3 fw-bold">승차예약</a>
             </div>
         </div>

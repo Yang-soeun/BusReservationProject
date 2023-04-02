@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,10 +64,26 @@ public class TimeTableServiceTest {
 
     @Test
     public void Nolist(){
-        List<Long> longs = timeTableService.NoList(2L, 11L);
 
-        for (Long aLong : longs) {
-            System.out.println("aLong = " + aLong);
+        List<Long> NoLists = new ArrayList<>();
+
+        if(timeTableService.NoReservation(53L, 55L) != 53L)//다르면 중간에 예약자가 있는 경우임
+        {
+            Long newId = timeTableService.NoReservation(53L, 55L);
+
+            NoLists = timeTableService.NoList(newId, 55L);
         }
+
+        for (Long noList : NoLists) {
+            System.out.println(noList);
+        }
+
+    }
+
+    @Test
+    public void NoReservation(){
+        Long aLong = timeTableService.NoReservation(57L, 66L);
+
+        System.out.println(aLong);
     }
 }

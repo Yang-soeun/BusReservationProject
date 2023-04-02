@@ -7,17 +7,19 @@ import bus.busReservation.service.BusService;
 import bus.busReservation.service.ReservationService;
 import bus.busReservation.service.TimeTableService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Log4j2
 public class ReservationController {
     private final ReservationService reservationService;
     private final TimeTableService timeTableService;
@@ -49,20 +51,23 @@ public class ReservationController {
             model.addAttribute("start", start);
             model.addAttribute("timetableList", destinationDtoList);
 
-            Long endId = busService.findEndBusStopId(busName);
-
             List<Long> NoLists = new ArrayList<>();
 
-            if(timeTableService.NoReservation(id, endId) != id)
-            {
-                Long newId = timeTableService.NoReservation(id, endId);
+            TimetableDto last = destinationDtoList.get(destinationDtoList.size() - 1);//timetable의 마지막 timetable id 반환
+            Long endId = last.getId();
 
+            Long newId = timeTableService.NoReservation(id, endId);
+
+            if(newId==id)//중간에 예약자가 없는 경우
+            {
+                model.addAttribute("NoLists", NoLists);
+
+            }
+            else{//중간에 예약자가 있는 경우
                 NoLists = timeTableService.NoList(newId, endId);
                 model.addAttribute("NoLists", NoLists);
             }
-            else{
-                model.addAttribute("NoLists", NoLists);
-            }
+
             return "reservation/destination";
         }
         return null;

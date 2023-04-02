@@ -1,5 +1,7 @@
 package bus.busReservation.dto;
 
+import bus.busReservation.domain.Bus;
+import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +12,6 @@ import java.sql.Time;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class TimetableDto {
     private String bus_name;
     private String busStop_name;

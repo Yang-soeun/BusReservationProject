@@ -15,7 +15,7 @@
 MySQL, JPA, Spring, CSS
 
 ### DB 설계
-![image](https://user-images.githubusercontent.com/87464750/210979733-092f71aa-c090-4b35-a082-2a3ccb29ac8a.png)
+![image](https://user-images.githubusercontent.com/87464750/229339478-d566fe14-9fcf-43e8-a790-564e1adbf52a.png)
 
 ## 📑 사용자 페이지
 ### 💡 시간표 조회

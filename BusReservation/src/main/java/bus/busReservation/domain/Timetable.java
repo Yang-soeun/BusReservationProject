@@ -9,7 +9,7 @@ import java.sql.Time;
 @Entity
 @Getter
 @Setter
-//@DynamicUpdate//변경된 칼럼이 있으면 update
+@DynamicUpdate//변경된 칼럼이 있으면 update
 public class Timetable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

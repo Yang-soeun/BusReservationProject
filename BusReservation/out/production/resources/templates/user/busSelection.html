@@ -79,6 +79,15 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+      td {
+          background-color: white;
+          border-top-left-radius: 15px;
+          bordor-top-right-radius: 15px;
+      }
+/*      thead th {
+          border-top-left-radius: 15px;
+          bordor-top-right-radius: 15px;
+      }*/
     </style>
 
 
@@ -94,28 +103,30 @@
     </symbol>
 </svg>
 
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <nav class="navbar navbar-expand-sm" style="background-color: #fff;" >
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse justify-content-end">
-                        <ul class="navbar-nav" >
-                            <li class="nav-item">
-                                <button sec:authorize="isAnonymous()" class="btn btn-outline-primary" type="button" onclick="location.href='/loginForm'" >로그인</button>
-                            </li>
-                            <li class="nav-item">
-                                <button sec:authorize="isAuthenticated()" class="btn btn-outline-primary" type="button" onclick="location.href='/doLogout'">로그아웃</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-</div>
 
 <div class="container py-3">
+    
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <nav class="navbar navbar-expand-sm" style="background-color: #506FD1;" >
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse justify-content-end">
+                            <ul class="navbar-nav" >
+                                <li class="nav-item">
+                                    <button sec:authorize="isAnonymous()" class="btn btn-outline-light" type="button" onclick="location.href='/loginForm'" >로그인</button>
+                                </li>
+                                <li class="nav-item">
+                                    <button sec:authorize="isAuthenticated()" class="btn btn-outline-light" type="button" onclick="location.href='/doLogout'">로그아웃</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
     <header>
         <div class="container my-5">
             <div class="bg-light p-5 rounded">

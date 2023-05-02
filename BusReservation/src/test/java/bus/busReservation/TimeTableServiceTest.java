@@ -1,5 +1,6 @@
 package bus.busReservation;
 
+import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.Timetable;
 import bus.busReservation.dto.TimetableDto;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RunWith(SpringRunner.class)
@@ -30,7 +32,7 @@ public class TimeTableServiceTest {
     public void 도착지_찾기(){
         //Timetable byId = timeTableRepository.findById(127L);
 
-        List<TimetableDto> timetableDtos = timeTableService.destinationList("100", 11L);
+        List<TimetableDto> timetableDtos = timeTableService.destinationList("100", 55L);
 
         System.out.println("======================================================================================");
         for (TimetableDto timetableDto : timetableDtos) {
@@ -85,5 +87,11 @@ public class TimeTableServiceTest {
         Long aLong = timeTableService.NoReservation(57L, 66L);
 
         System.out.println(aLong);
+    }
+
+    @Test
+    public void timetableId로_버스정류장_아이디_찾기(){
+        Optional<BusStop> endByTimetableId = timeTableRepository.findEndByTimetableId(55L);
+        System.out.println(endByTimetableId.get().getId());
     }
 }

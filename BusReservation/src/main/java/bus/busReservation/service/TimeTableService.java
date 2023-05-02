@@ -1,8 +1,10 @@
 package bus.busReservation.service;
 
 import bus.busReservation.domain.Bus;
+import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import bus.busReservation.dto.TimetableDto;
+import bus.busReservation.exception.EndTimetableException;
 import bus.busReservation.repository.BusRepository;
 import bus.busReservation.repository.ReservationRepository;
 import bus.busReservation.repository.TimeTableRepository;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +39,9 @@ public class TimeTableService {
      * 도착지 리스트 반환해주는 함수
      */
     public List<TimetableDto> destinationList(String busName, Long id){//id 이후부터 해당버스의 종점까지 출력해야함
+
+        if(isEndBusStop(busName, id))
+            throw new EndTimetableException("종점은 예약 불가");
 
         List<Timetable> list = new ArrayList<>();
         Long start_id = busService.findStartBusId(busName);//버스의 출발지
@@ -69,11 +75,7 @@ public class TimeTableService {
         return null;
     }
 
-//    public Long timetableEndId(Long id, String busName){
-//        Long endBusStopId = busService.findEndBusStopId(busName);
-//
-//
-//    }
+
 
 
     //예약된 timetable 의 status 를 true 로 변경하기
@@ -114,4 +116,17 @@ public class TimeTableService {
         return lists;
     }
 
+    //종점인지 확인하는 함수
+    public boolean isEndBusStop(String busName, Long id){
+
+        if(busRepository.findEndByBusName(busName).isPresent() && timeTableRepository.findEndByTimetableId(id).isPresent()){
+            Optional<BusStop> endByBusName = busRepository.findEndByBusName(busName);
+            Optional<BusStop> endByTimetableId = timeTableRepository.findEndByTimetableId(id);
+
+            if(endByBusName.get().getId() == endByTimetableId.get().getId())
+                return true;
+        }
+
+        return false;
+    }
 }

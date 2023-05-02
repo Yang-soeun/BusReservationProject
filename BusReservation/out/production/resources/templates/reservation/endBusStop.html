@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Jumbotron example · Bootstrap v5.2</title>
+    <title>Modals · Bootstrap v5.2</title>
 
-    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/jumbotron/">
+    <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/modals/">
 
 
 
@@ -82,44 +82,32 @@
     </style>
 
 
+    <!-- Custom styles for this template -->
+    <link href="modals.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-<div class="p-4 p-md-5 mb-4 rounded" style="background-color: #506FD1;">
-    <div class="col-md-6 px-0">
-        <h1 class="text-white fw-bold">Low-floor bus reservation system membership registration page</h1>
-        <p  class="text-white fw-bold">저상버스 예약 시스템 회원가입 페이지</p>
-    </div>
-</div>
-</div>
-<main>
 
-    </br>
-
-    <div class="container py-4">
-
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>사용자</h2>
-                    <p>User registration</p>
-                    <a th:href="@{/user/joinForm}" class="btn btn-outline-secondary" role="button">회원가입</a>
-                </div>
+<div class="modal modal-sheet position-static d-block bg-light py-5" tabindex="-1" role="dialog" id="modalSheet">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-gradient rounded-4 shadow">
+            <div class="modal-header border-bottom-0">
+                <h1 class="modal-title fs-5">종점 예약 불가</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            <div class="col-md-6">
-                <div class="h-100 p-5 bg-light border rounded-3">
-                    <h2>버스기사</h2>
-                    <p>Bus registration</p>
-                    <a th:href="@{/bus/joinForm}" class="btn btn-outline-secondary" role="button">회원가입</a>
-                </div>
+            <div class="modal-body py-0">
+                <p>종점을 출발지로 예약할 수 없습니다.</p>
+            </div>
+            <div class="modal-footer flex-column border-top-0">
+                <form class="input-group mb-1" action="/reservation" method="GET">
+                    <button type="submit" class="btn btn-lg btn-primary w-100 mx-0 mb-2">OK</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-        <footer class="pt-3 mt-4 text-muted border-top">
-            &copy; 2023 Bus_Reservation < Soeun and Hyojeong >
-        </footer>
-</main>
+<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

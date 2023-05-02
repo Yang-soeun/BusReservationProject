@@ -82,11 +82,12 @@
 
     <div class="container">
         <div class="bg-light p-0 rounded">
-            <select onchange="location.href= this.value + '/busOne'" name="Id" id="bus" class="form-control" style="width:100%;height:50px;" >
+            <select onchange="location.href= '/' + value + '/busOne'" name="Id" id="bus" class="form-control" style="width:100%;height:50px;" >
                 <option value="">노선선택</option>
                 <option th:each="bus : ${busList}"
                         th:value="${bus.name}"
                         th:text="${bus.name}"/>
+
             </select>
         </div>
     </div>

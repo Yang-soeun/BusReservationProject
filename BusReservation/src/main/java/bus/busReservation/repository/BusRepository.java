@@ -1,6 +1,7 @@
 package bus.busReservation.repository;
 
 import bus.busReservation.domain.Bus;
+import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -34,5 +35,14 @@ public class BusRepository {
                                 + " where b.id = :id", Bus.class)
                         .setParameter("id", id)
                         .getSingleResult());
+    }
+
+    //버스 이름으로 종점 id알기
+    public Optional<BusStop> findEndByBusName(String busName){
+        return em.createQuery("select b.busStop_end from Bus b"
+                        + " where b.name like :name", BusStop.class)
+                .setParameter("name", busName)
+                .getResultList()
+                .stream().findFirst();
     }
 }

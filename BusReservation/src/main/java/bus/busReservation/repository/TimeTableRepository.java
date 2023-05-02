@@ -1,4 +1,5 @@
 package bus.busReservation.repository;
+import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -40,4 +41,12 @@ public class TimeTableRepository {
                 .getResultList();
     }
 
+    //timetableId로 버스 정류장 아이디 알기
+    public Optional<BusStop> findEndByTimetableId(Long id){
+        return em.createQuery("select t.busStop from Timetable t"
+                        + " where t.id = :id", BusStop.class)
+                .setParameter("id", id)
+                .getResultList()
+                .stream().findFirst();
+    }
 }

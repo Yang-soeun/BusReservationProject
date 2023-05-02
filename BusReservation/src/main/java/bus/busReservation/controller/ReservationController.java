@@ -2,6 +2,7 @@ package bus.busReservation.controller;
 
 import bus.busReservation.domain.Timetable;
 import bus.busReservation.dto.TimetableDto;
+import bus.busReservation.exception.EndTimetableException;
 import bus.busReservation.repository.TimeTableRepository;
 import bus.busReservation.service.BusService;
 import bus.busReservation.service.ReservationService;
@@ -42,7 +43,9 @@ public class ReservationController {
 
     //예약-도착지 선택하는 부분
     @GetMapping("/reservation/{id}/{busName}")
-    public String destination(@PathVariable("id") Long id, @PathVariable("busName") String busName, Model model ){
+    public String destination(@PathVariable("id") Long id, @PathVariable("busName") String busName, Model model )
+    {
+        Long endId = id;
 
         if(timeTableRepository.findById(id).isPresent()) {
             Timetable start = timeTableRepository.findById(id).get();
@@ -53,8 +56,10 @@ public class ReservationController {
 
             List<Long> NoLists = new ArrayList<>();
 
-            TimetableDto last = destinationDtoList.get(destinationDtoList.size() - 1);//timetable의 마지막 timetable id 반환
-            Long endId = last.getId();
+            if(destinationDtoList.size()>0){
+                TimetableDto last = destinationDtoList.get(destinationDtoList.size() - 1);//timetable의 마지막 timetable id 반환
+                endId = last.getId();
+            }
 
             Long newId = timeTableService.NoReservation(id, endId);
 

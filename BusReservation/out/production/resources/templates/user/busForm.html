@@ -46,7 +46,7 @@
                                 <button sec:authorize="isAnonymous()" class="btn btn-outline-primary" type="button" onclick="location.href='/loginForm'" >로그인</button>
                             </li>
                             <li class="nav-item">
-                                <button sec:authorize="isAuthenticated()" class="btn btn-outline-primary" type="button" onclick="location.href='/doLogout'">로그아웃</button>
+                                <button sec:authorize="isAuthenticated()" class="btn btn-danger" type="button" onclick="location.href='/bus/selection'">운행종료</button>
                             </li>
                         </ul>
                     </div>

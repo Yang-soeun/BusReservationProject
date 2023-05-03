@@ -52,10 +52,7 @@
                             <ul class="navbar-nav" >
                                 <li class="nav-item">
                                     <button sec:authorize="isAnonymous()" class="btn btn-outline-light" type="button" onclick="location.href='/loginForm'" >로그인</button>
-                                </li>
-                                <li class="nav-item">
                                     <button sec:authorize="isAuthenticated()" class="btn btn-outline-light" type="button" onclick="location.href='/doLogout'">로그아웃</button>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -101,10 +98,10 @@
                 <td th:text="${timetable.bus_name}"></td>
                 <td th:text="${timetable.busStop_name}"></td>
                 <td th:text="${timetable.time}"></td>
-                <th th:text="예약불가-좌석없음" th:if="${timetable.isStatus == true}"></th>
+                <th th:text="예약불가-좌석없음" th:if="${timetable.seatStatus == 1}"></th>
                 <td>
-                    <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${#arrays.contains(NoLists, timetable.id) and timetable.status == false}">불가</a>
-                    <a th:href="@{/complete/{start_id}/{end_id} (start_id=${start.id}, end_id=${timetable.id})}" class="btn btn-warning" role="button" th:unless="${#arrays.contains(NoLists, timetable.id) or timetable.status == true}">선택</a>
+                    <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${#arrays.contains(NoLists, timetable.id) and timetable.seatStatus == 0}">불가</a>
+                    <a th:href="@{/complete/{start_id}/{end_id} (start_id=${start.id}, end_id=${timetable.id})}" class="btn btn-warning" role="button" th:unless="${#arrays.contains(NoLists, timetable.id) or timetable.seatStatus == 1}">선택</a>
                 </td>
             </tr>
             </tbody>

@@ -17,13 +17,14 @@ public class TimetableDto {
     private String busStop_name;
     private Time time;
     private Long id;
-    private boolean status;
+
+    private Long seatStatus;
 
     public TimetableDto(Timetable timetable){
         bus_name= timetable.getBus().getName();
         busStop_name=timetable.getBusStop().getName();
         time=timetable.getTime();
         id = timetable.getId();
-        status = timetable.isStatus();
+        seatStatus = timetable.isSeatStatus();
     }
 }

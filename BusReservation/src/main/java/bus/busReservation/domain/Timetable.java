@@ -9,7 +9,6 @@ import java.sql.Time;
 @Entity
 @Getter
 @Setter
-@DynamicUpdate//변경된 칼럼이 있으면 update
 public class Timetable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +16,8 @@ public class Timetable {
 
     @Column(nullable = false)
     private Time time;
-
     @Column(nullable = false)
-    private boolean status;
+    private Long seatStatus;
 
     @ManyToOne
     @JoinColumn(name = "bus_stop_id", nullable = false)
@@ -30,13 +28,13 @@ public class Timetable {
     private Bus bus;
 
     public void trueStatus(){
-        this.setStatus(true);
-    }
+        this.setSeatStatus(1L);
+    }//예약좌석
     public void falseStatus(){
-        this.setStatus(false);
-    }
+        this.setSeatStatus(0L);
+    }//빈좌석
 
-    public boolean isStatus() {
-        return status;
+    public Long isSeatStatus() {
+        return seatStatus;
     }
 }

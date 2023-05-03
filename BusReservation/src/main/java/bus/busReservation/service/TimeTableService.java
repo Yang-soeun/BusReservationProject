@@ -98,7 +98,7 @@ public class TimeTableService {
         List<Timetable> timetables = timeTableRepository.start_end_id(start, end);
 
         for (Timetable timetable : timetables) {
-            if(timetable.isStatus() == true)//예약자가 있는 경우
+            if(timetable.isSeatStatus() == 1)//예약자가 있는 경우
                 return timetable.getId();
         }
         return start;

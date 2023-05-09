@@ -18,7 +18,7 @@ public class ReservationRepository {
                         "join t.busStop s" +
                         " where s.name like concat('%',:name,'%') " +
                         "and t.time  >= date_format(now(),'%H:%i:%s') "+
-                        "group by t.bus.name,s.name order by t.time asc", Timetable.class)
+                        "group by t.bus.id,s.name order by t.time asc", Timetable.class)
                 .setParameter("name", name)
                 .getResultList();
     }
@@ -32,6 +32,7 @@ public class ReservationRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
     //예약 정보 저장
     public void save(Reservation reservation) {
         em.persist(reservation);

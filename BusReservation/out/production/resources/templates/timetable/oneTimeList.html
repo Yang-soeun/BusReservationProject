@@ -31,6 +31,12 @@
     <link href="carousel.css" rel="stylesheet">
     <link href="form-validation.css" rel="stylesheet">
 
+    <style>
+        img {
+            max-width: 100%;
+        }
+    </style>
+
 </head>
 
 <header>
@@ -96,11 +102,48 @@
     <br>
     <hr width = "100%" color = "#506FD1">
 
-    <h1  th:text="${busName}" style="text-align:center;"> </h1>
-    <h1  style="text-align:center;">저상버스 시간표</h1>
+<!--    <h1  th:text="${busName}" style="text-align:center;"> </h1>-->
     <br>
 
     <div class="container">
+<!--        <h1  style="text-align:center;">저상버스 시간표</h1>-->
+        <span th:if="${busName == '100'}" style="width:auto;height: auto;">
+                <img src = "/img/100.png" >
+        </span>
+        <span th:if="${busName == '200'}">
+                <img src = "/img/200.png">
+        </span>
+        <span th:if="${busName == '300'}">
+                <img src = "/img/300.png">
+        </span>
+        <span th:if="${busName == '400'}">
+                <img src = "/img/400.png">
+        </span>
+        <span th:if="${busName == '500'}">
+                <img src = "/img/500.png">
+        </span>
+        <span th:if="${busName == '600'}">
+                <img src = "/img/600.png">
+        </span>
+        <span th:if="${busName == '700'}">
+                <img src = "/img/700.png">
+        </span>
+        <span th:if="${busName == '800'}">
+                <img src = "/img/800.png">
+        </span>
+        <span th:if="${busName == '900'}">
+                <img src = "/img/900.png">
+        </span>
+        <span th:if="${busName == '110'}">
+                <img src = "/img/110.png">
+        </span>
+        <span th:if="${busName == '120'}">
+                <img src = "/img/120.png">
+        </span>
+        <br>
+        <br>
+        <br>
+
         <table class="table table-striped col-sm-8 py-5 mx-auto">
             <thead>
             <tr>

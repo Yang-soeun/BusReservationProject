@@ -25,11 +25,11 @@ public class Reservation {
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "승차정보", nullable = false)
+    @JoinColumn(name = "start", nullable = false)
     private Timetable onInfo;
 
     @OneToOne
-    @JoinColumn(name = "하차정보", nullable = false)
+    @JoinColumn(name = "end", nullable = false)
     private Timetable offInfo;
 
     @Enumerated(EnumType.STRING)

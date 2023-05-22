@@ -91,32 +91,10 @@
   <div class="container">
     <div class="container-fluid">
       <form class="input-group mb-1" action="/reservation/search" method="GET">
-        <input type="search" name="keyword"  class="form-control" placeholder="승차예약 하려는 정류소를 입력하시오" aria-label="Search" aria-describedby="button-addon2">
+        <input type="search" name="keyword" class="form-control" placeholder="검색어를 입력하세요" aria-label="Search" aria-describedby="button-addon2">
         <button class="btn btn-outline-primary" type="submit" id="button-addon2">검색</button>
       </form>
     </div>
-  </div>
-
-  <br>
-  <hr width = "100%" color = "#506FD1">
-
-  <div class="container">
-
-      <table class="table table-hover col-sm-8 py-5 mx-auto" >
-        <tbody>
-        <tr th:each="timetable : ${timetableList}">
-          <td th:text="${timetable.bus_name}"></td>
-          <td th:text="${timetable.busStop_name}"></td>
-          <td th:text="${timetable.time}"></td>
-<!--          <th th:text="예약불가-좌석없음" th:if="${timetable.status == true}"></th>-->
-          <td>
-            <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${timetable.seatStatus == 1 or timetable.seatStatus == 2}">좌석없음</a>
-            <a th:href="@{/reservation/{id}/{name} (id=${timetable.id}, name=${timetable.bus_name})}" class="btn btn-warning" role="button" th:if="${timetable.seatStatus == 0}">예약</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
   </div>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -124,36 +102,5 @@
   </footer>
 
 </main>
-
-
-
-<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">예약 불가</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-         빈자리가 없습니다.
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-
 </body>
 </html>

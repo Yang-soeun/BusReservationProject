@@ -110,7 +110,7 @@
           <td th:text="${timetable.time}"></td>
 <!--          <th th:text="예약불가-좌석없음" th:if="${timetable.status == true}"></th>-->
           <td>
-            <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${timetable.seatStatus == 1}">좌석없음</a>
+            <a data-toggle="modal" data-target="#myModal" class="btn btn-danger" role="button" th:if="${timetable.seatStatus == 1 or timetable.seatStatus == 2}">좌석없음</a>
             <a th:href="@{/reservation/{id}/{name} (id=${timetable.id}, name=${timetable.bus_name})}" class="btn btn-warning" role="button" th:if="${timetable.seatStatus == 0}">예약</a>
           </td>
         </tr>

@@ -53,7 +53,7 @@ public class TimeTableService {
             Long busStop_id = destination.getBusStop().getId(); //정류장 id
 
 
-            while (timetable_id < 262L) {//262이후로 타임 테이블이 없음
+            while (timetable_id < 416L) {//262이후로 타임 테이블이 없음
                 timetable_id++;
 
                 destination = timeTableRepository.findById(timetable_id).get();

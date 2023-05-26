@@ -26,14 +26,7 @@ public class BusServiceTest {
 
     @Autowired
     TimeTableRepository timeTableRepository;
-    
-    @Test
-    public void 버스_이름_찾기(){
-        List<Bus> allName = busService.findAllName();
-        for (Bus bus : allName) {
-            System.out.println("bus = " + bus.getName());
-        }
-    }
+
 
     @Test
     public void 버스_이름으로_종점_아이디_찾기(){

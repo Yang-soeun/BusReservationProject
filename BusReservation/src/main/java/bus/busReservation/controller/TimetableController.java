@@ -21,8 +21,8 @@ public class TimetableController {
 
     @GetMapping("/busAll")
     public String timetableList(Model model){
-        List<Bus> busList = busService.findAllName();//버스 이름 찾기
-        model.addAttribute("busList", busList);
+        List<String> nameList = busService.findAllName();//버스 이름 찾기
+        model.addAttribute("nameList", nameList);
 
         return "timetable/timeList";
     }
@@ -32,7 +32,7 @@ public class TimetableController {
 
         Long c = busService.findStartBusId(busName);//버스 이름으로 출발 정류장 id 값 가져오기
 
-        List<Bus> busList = busService.findAllName();
+        List<Bus> busList = busService.findAll();
         List<Timetable> timetables = timeTableService.findTimetable(busName);//시간표 찾기
 
         model.addAttribute("c", c);//출발 정류장

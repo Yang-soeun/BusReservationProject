@@ -1,5 +1,6 @@
 package bus.busReservation;
 
+import bus.busReservation.domain.Bus;
 import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Reservation;
 import bus.busReservation.domain.Timetable;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,18 +30,18 @@ public class TimeTableServiceTest {
     @Autowired TimeTableService timeTableService;
     @Autowired ReservationRepository reservationRepository;
 
-    @Test
-    public void 도착지_찾기(){
-        //Timetable byId = timeTableRepository.findById(127L);
-
-        List<TimetableDto> timetableDtos = timeTableService.destinationList("100", 55L);
-
-        System.out.println("======================================================================================");
-        for (TimetableDto timetableDto : timetableDtos) {
-            System.out.println("timetableDto.getBusStop_name() = " + timetableDto.getBusStop_name());
-        }
-        System.out.println("======================================================================================");
-    }
+//    @Test
+//    public void 도착지_찾기(){
+//        //Timetable byId = timeTableRepository.findById(127L);
+//
+//        List<TimetableDto> timetableDtos = timeTableService.destinationList("100", 55L);
+//
+//        System.out.println("======================================================================================");
+//        for (TimetableDto timetableDto : timetableDtos) {
+//            System.out.println("timetableDto.getBusStop_name() = " + timetableDto.getBusStop_name());
+//        }
+//        System.out.println("======================================================================================");
+//    }
 //
     @Test
     public void 상태변경(){
@@ -93,5 +95,20 @@ public class TimeTableServiceTest {
     public void timetableId로_버스정류장_아이디_찾기(){
         Optional<BusStop> endByTimetableId = timeTableRepository.findEndByTimetableId(55L);
         System.out.println(endByTimetableId.get().getId());
+    }
+
+    @Test
+    public void timetableId로_도착지_아이디_찾기(){
+
+        Optional<Timetable> timetable = timeTableRepository.findById(322L);
+        Long bus_id = timetable.get().getBus().getId();
+        Long end_id = timetable.get().getBus().getBusStop_end().getId();
+        Time sTime = timetable.get().getTime();
+
+        System.out.println("bus_id = " + bus_id);
+        System.out.println("end_id = " + end_id);
+
+        Optional<Long> destinationId = timeTableRepository.findDestinationId(bus_id, end_id, sTime);
+        System.out.println("destinationId.get() = " + destinationId.get());
     }
 }

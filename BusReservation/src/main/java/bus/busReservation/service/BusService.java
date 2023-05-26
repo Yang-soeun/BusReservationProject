@@ -17,8 +17,13 @@ public class BusService {
 
 
     //모든 버스의 이름
-    // 중복 제거 해야함 !!!!!!!!!!
-    public List<Bus> findAllName() {
+    public List<String> findAllName() {
+        List<String> list = busRepository.findName();
+        list.remove(1);
+        return list;
+    }
+
+    public List<Bus> findAll() {
         List<Bus> list = busRepository.findAll();
         list.remove(1);
         return list;

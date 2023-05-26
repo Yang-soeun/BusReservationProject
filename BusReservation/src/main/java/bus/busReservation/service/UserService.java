@@ -2,6 +2,7 @@ package bus.busReservation.service;
 
 import bus.busReservation.domain.User;
 import bus.busReservation.repository.UserRepo;
+import bus.busReservation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,11 @@ import java.util.List;
 public class UserService{
 
     private final UserRepo userRepo;
+    private final UserRepository userRepository;
 
     @Transactional()
     public User findById(String id) {
-        return userRepo.findById(id);
+        return userRepository.findById(id);
     }
 
     public User save(User user){

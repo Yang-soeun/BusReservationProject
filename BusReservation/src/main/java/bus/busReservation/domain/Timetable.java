@@ -19,11 +19,11 @@ public class Timetable {
     @Column(nullable = false)
     private Long seatStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_stop_id", nullable = false)
     private BusStop busStop;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id", nullable = false)
     private Bus bus;
 

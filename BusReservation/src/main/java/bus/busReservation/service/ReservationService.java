@@ -6,8 +6,6 @@ import bus.busReservation.domain.Timetable;
 import bus.busReservation.domain.User;
 import bus.busReservation.dto.ReservationDto;
 import bus.busReservation.dto.TimetableDto;
-import bus.busReservation.exception.EmptyKeywordException;
-import bus.busReservation.exception.EndTimetableException;
 import bus.busReservation.repository.BusRepository;
 import bus.busReservation.repository.ReservationRepository;
 import bus.busReservation.repository.TimeTableRepository;
@@ -31,10 +29,6 @@ public class ReservationService {
 
     @Transactional
     public List<TimetableDto> findByBusStopName(String keyword){
-
-        if(keyword.isEmpty()){
-            throw new EmptyKeywordException("검색어를 입력하세요");
-        }
 
         List<Timetable> timetables=reservationRepository.findByBusStopName(keyword);
 

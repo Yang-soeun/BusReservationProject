@@ -1,5 +1,4 @@
 package bus.busReservation.repository;
-import bus.busReservation.domain.Bus;
 import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +35,6 @@ public class TimeTableRepository {
                 em.createQuery("select t from Timetable t"
                         + " where t.id = :id", Timetable.class)
                 .setParameter("id", id)
-                .setHint("org.hibernate.readOnly", true)
                 .getSingleResult());
     }
 
@@ -46,7 +44,6 @@ public class TimeTableRepository {
                 + " where t.id >= :start_id and t.id <= :end_id", Timetable.class)
                         .setParameter("start_id", start)
                         .setParameter("end_id", end)
-                .setHint("org.hibernate.readOnly", true)
                 .getResultList();
     }
 

@@ -74,7 +74,6 @@ public class ReservationRepository {
         return em.createQuery("select r from Reservation r"
         + " where r.id = :id", Reservation.class)
                 .setParameter("id", id)
-                .setHint("org.hibernate.readOnly", true)
                 .getSingleResult();
     }
 }

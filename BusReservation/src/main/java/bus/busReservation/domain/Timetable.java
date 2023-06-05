@@ -1,14 +1,11 @@
 package bus.busReservation.domain;
 
 import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.sql.Time;
 
 @Entity
 @Getter
-@Setter
 public class Timetable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +25,10 @@ public class Timetable {
     private Bus bus;
 
     public void trueStatus(){
-        this.setSeatStatus(1L);
+        this.seatStatus = 1L;
     }//예약좌석
     public void falseStatus(){
-        this.setSeatStatus(0L);
+        this.seatStatus = 0L;
     }//빈좌석
 
     public Long isSeatStatus() {

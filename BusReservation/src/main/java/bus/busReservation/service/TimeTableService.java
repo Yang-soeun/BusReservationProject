@@ -1,6 +1,5 @@
 package bus.busReservation.service;
 
-import bus.busReservation.domain.Bus;
 import bus.busReservation.domain.BusStop;
 import bus.busReservation.domain.Timetable;
 import bus.busReservation.dto.TimetableDto;

@@ -15,6 +15,7 @@
 MySQL, JPA, Spring, CSS
 
 ### DB 설계
+![image](https://github.com/Yang-soeun/BusReservationProject/assets/87464750/daa5fa96-c54f-4254-a1e7-41c45ffaa9ae)
 
 
 ## 📑 사용자 페이지

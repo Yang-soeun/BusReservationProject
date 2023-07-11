@@ -8,11 +8,12 @@
 - 예약기능
 
 #### 버스전용 페이지
+- 운행할 버스 선택
 - 예약 현황
 - 예약 완료처리 기능
 
 ### 기술 스택
-MySQL, JPA, Spring, CSS
+MySQL, JPA, Spring, Thymeleaf+BootStrap
 
 ### DB 설계
 ![image](https://github.com/Yang-soeun/BusReservationProject/assets/87464750/daa5fa96-c54f-4254-a1e7-41c45ffaa9ae)

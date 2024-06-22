@@ -12,7 +12,7 @@
 |프론트| BootStrap + Thymeleaf |
 
 ### 기능 흐름도
-![image](https://github.com/Yang-soeun/BusReservationProject/assets/87464750/1492e7b3-5ca5-41b8-a7c9-1d2c1ea27a64)
+<img src = https://github.com/Yang-soeun/BusReservationProject/assets/87464750/1492e7b3-5ca5-41b8-a7c9-1d2c1ea27a64 width="1000" height="500"/>
 
 ### DB 설계
-![image](https://github.com/Yang-soeun/BusReservationProject/assets/87464750/daa5fa96-c54f-4254-a1e7-41c45ffaa9ae)
+<img src = https://github.com/Yang-soeun/BusReservationProject/assets/87464750/daa5fa96-c54f-4254-a1e7-41c45ffaa9ae>
